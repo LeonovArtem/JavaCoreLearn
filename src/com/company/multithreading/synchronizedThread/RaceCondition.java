@@ -37,7 +37,11 @@ public class RaceCondition {
         System.out.println("doWork:Counter = " + counter);
     }
 
-    private void increment() {
+    /**
+     * synchronized - только один поток в один момент времени получает доступ к телу метода.
+     * Отстальные потоки ждут
+     */
+    private synchronized void increment() {
         for (int i = 0; i < 10000; i++) {
             counter = counter + 1;
         }
