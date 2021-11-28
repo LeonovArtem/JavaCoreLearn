@@ -42,21 +42,25 @@ class Worker {
         }
     }
 
-    public synchronized void addToList1() {
+    public void addToList1() {
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        list_1.add(random.nextInt(100));
+        synchronized (list_1) {
+            list_1.add(random.nextInt(100));
+        }
     }
 
-    public synchronized void addToList2() {
+    public void addToList2() {
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        list_2.add(random.nextInt(100));
+        synchronized (list_2) {
+            list_2.add(random.nextInt(100));
+        }
     }
 }
