@@ -17,6 +17,12 @@ class Worker {
     private List<Integer> list_1 = new ArrayList<>();
     private List<Integer> list_2 = new ArrayList<>();
 
+    /**
+     * Хороший тон создавать отдельные объекты для синхронизации
+     */
+    private Object lockForList1 = new Object();
+    private Object lockForList2 = new Object();
+
     public void execute() throws InterruptedException {
         long before = System.currentTimeMillis();
 
@@ -48,7 +54,7 @@ class Worker {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        synchronized (list_1) {
+        synchronized (lockForList1) {
             list_1.add(random.nextInt(100));
         }
     }
@@ -59,7 +65,7 @@ class Worker {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        synchronized (list_2) {
+        synchronized (lockForList2) {
             list_2.add(random.nextInt(100));
         }
     }
